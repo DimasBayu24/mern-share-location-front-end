@@ -26,7 +26,7 @@ const Users = (props) => {
       }
     };
     fetchUsers();
-  }, []);
+  }, [dispatch]);
 
   return (
     <React.Fragment>
