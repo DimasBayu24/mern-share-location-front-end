@@ -20,7 +20,7 @@ const NewPlace = () => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [locationAddress, setLocationAddress] = useState(null);
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const { isLoading, error, clearError } = useHttpClient();
   const [formState, inputHandler] = useForm(
     {
       title: {

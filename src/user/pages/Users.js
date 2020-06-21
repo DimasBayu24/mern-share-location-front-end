@@ -1,32 +1,28 @@
 import React, { useEffect, useState } from 'react';
+import Axios from 'axios';
 import UsersList from '../components/UsersList';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import { useHttpClient } from '../../shared/hooks/http-hook';
-import { connect, useDispatch } from 'react-redux';
-import { getUser } from '../../redux/actions/place';
 
-const Users = (props) => {
+const Users = () => {
   const { isLoading, error, clearError } = useHttpClient();
   const [loadedUsers, setLoadedUsers] = useState();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const responseData = await dispatch(getUser());
-        // Axios.get(
-        //   'https://learn-mernstack.herokuapp.com/api/users'
-        // );
-        await console.log('test WOOOO', responseData.value);
+        const responseData = await Axios.get(
+          'https://learn-mernstack.herokuapp.com/api/users'
+        );
 
-        await setLoadedUsers(responseData.value.data.users);
+        await setLoadedUsers(responseData.data.users);
       } catch (err) {
         console.log(err);
       }
     };
     fetchUsers();
-  }, [dispatch]);
+  }, []);
 
   return (
     <React.Fragment>
@@ -40,10 +36,5 @@ const Users = (props) => {
     </React.Fragment>
   );
 };
-const mapStateToProps = (place) => {
-  return {
-    place,
-  };
-};
 
-export default connect(mapStateToProps)(Users);
+export default Users;
